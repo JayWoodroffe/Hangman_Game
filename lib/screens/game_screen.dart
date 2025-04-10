@@ -2,8 +2,11 @@
 
 import 'dart:math';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:hangmanapp/screens/end_screen.dart';
 import 'package:hangmanapp/utils.dart';
+import 'package:flutter/services.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
@@ -17,8 +20,17 @@ class _GameScreenState extends State<GameScreen> {
 
   List guessedLetters = [];
 
+  final player = AudioPlayer();
+
+  bool soundOn = true;
   //randomly selecting a word from the list upon running
   String word = wordsList[Random().nextInt(wordsList.length)];
+
+  _playSound(String sound) async {
+    if (soundOn) {
+      await player.play(AssetSource("sounds/$sound"));
+    }
+  }
 
   //generate row of hearts
   Widget _buildLivesDisplay() {
@@ -59,19 +71,27 @@ class _GameScreenState extends State<GameScreen> {
     return displayedWord;
   }
 
+//when player guesses a letter
   _checkLetter(String letter) {
     if (word.contains(letter)) {
       setState(() {
         guessedLetters.add(letter);
       });
+      _playSound("actualCorrect.mp3");
     } else {
-      if (lives >= 1) {
+      if (lives > 1) {
         setState(() {
           guessedLetters.add(letter);
           lives--;
         });
+        _playSound("actualWrong.mp3");
+        //failed last guess
       } else {
-        print("You lost");
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    EndScreen(won: false, word: word, soundOn: soundOn)));
       }
     }
     bool wordCompleted = true;
@@ -83,14 +103,25 @@ class _GameScreenState extends State<GameScreen> {
         });
         break;
       }
-      if (wordCompleted) {
-        print("Won");
-      }
+    }
+    if (wordCompleted) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => EndScreen(
+                    won: true,
+                    word: word,
+                    soundOn: soundOn,
+                  )));
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
+      SystemUiOverlay.top,
+      SystemUiOverlay.bottom,
+    ]);
     return Scaffold(
       //header
       appBar: AppBar(
@@ -101,9 +132,13 @@ class _GameScreenState extends State<GameScreen> {
                 icon: Icon(
                   size: 35,
                   color: Colors.red.shade900,
-                  Icons.volume_up_rounded,
+                  soundOn ? Icons.volume_up_rounded : Icons.volume_off_rounded,
                 ),
-                onPressed: () {}),
+                onPressed: () {
+                  setState(() {
+                    soundOn = !soundOn;
+                  });
+                }),
           ),
         ],
         centerTitle: true,
