@@ -8,7 +8,7 @@ A Flutter-based Hangman game that offers a gothic-themed word-guessing experienc
 
 | Game Screen | Results Screen |
 |-------------|----------------|
-| ![Game Screen](assets/screenshots/game_screen.png) | ![Results Screen](assets/screenshots/results_screen.png) |
+| ![Game Screen](assets/screenshots/game_screen.jpg) | ![Results Screen](assets/screenshots/results_screen.jpg) |
 
 ---
 
