@@ -1,16 +1,45 @@
-# hangmanapp
+# Hangman Game 🎮
 
-A new Flutter project.
+A Flutter-based Hangman game that offers a gothic-themed word-guessing experience. This project showcases the integration of sound effects and interactive UI elements to enhance gameplay.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 📸 Screenshots
 
-A few resources to get you started if this is your first Flutter project:
+| Game Screen | Results Screen |
+|-------------|----------------|
+| ![Game Screen](assets/screenshots/game_screen.png) | ![Results Screen](assets/screenshots/results_screen.png) |
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## ✨ Features
+
+- **Interactive Gameplay** – Enjoy the classic Hangman experience with smooth, responsive UI.
+- **Sound Effects** – Audio feedback enhances user engagement.
+- **User-Friendly Interface** – Clean design for intuitive play.
+
+---
+
+## 🚀 Improvements (Planned)
+
+- **Expanded Word Source** – Integrate a broader dictionary. [Possible API](https://dictionaryapi.dev/)
+- **Multiplayer Mode** – Compete with friends in a real-time, two-player mode.
+
+---
+
+## 🧠 What I Learned
+
+- **Adding Sounds in Flutter** – Gained experience implementing audio feedback using Flutter’s sound libraries.
+
+---
+
+## 🛠️ Installation Instructions
+
+   ```bash
+   git clone https://github.com/JayWoodroffe/Hangman_Game.git
+   cd Hangman_Game
+   flutter pub get
+   flutter pub get
+```
+
+
